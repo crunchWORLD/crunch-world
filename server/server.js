@@ -7,6 +7,8 @@ const PORT = 3000;
 const mainRouter = require(path.resolve(__dirname, './routes/mainRouter'));
 const apiRouter = require(path.resolve(__dirname, './routes/apiRouter'));
 
+console.log(process.env.NODE_ENV);
+
 if (process.env.NODE_ENV === 'production') {
   // statically serve everything in the build folder on the route '/build'
   app.use('/build', express.static(path.join(__dirname, '../build')));

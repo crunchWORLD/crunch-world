@@ -11,7 +11,7 @@ apiRouter.get('/products', apiController.getProducts, (req, res) => {
 })
 
 apiRouter.get('/jorge', (req, res) => {
-  return res.status(200).set('Content-Type', 'text/plain').send('Sending response from /api/jorge');
+  return res.status(200).set('Content-Type', 'text/plain').send('Sending text/plain response from /api/jorge');
 })
 
 module.exports = apiRouter;
