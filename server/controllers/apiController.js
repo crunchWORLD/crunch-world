@@ -1,4 +1,5 @@
-// const db = require('../models/appModels.js');
+const path = require('path')
+const db = require(path.resolve(__dirname, '../../database/pool.js'));
 
 const apiController = {
   async getProducts(req, res, next) {
@@ -13,8 +14,8 @@ const apiController = {
       return next();
     });
     */
-   console.log('inside apiController.getProducts');
-   res.locals.products = {retrieved : 'products'};
+    console.log('inside apiController.getProducts');
+    res.locals.products = {retrieved : 'products'};
    return next();
   }
 };

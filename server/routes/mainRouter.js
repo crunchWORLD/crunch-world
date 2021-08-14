@@ -6,8 +6,8 @@ const mainController = require(path.resolve(__dirname, '../controllers/mainContr
 
 const mainRouter = express.Router();
 
-mainRouter.get('/', (req, res) => {
-  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+mainRouter.get('/', /*middleware from mainController goes here*/ (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../../index.html'));
 });
 
 module.exports = mainRouter;

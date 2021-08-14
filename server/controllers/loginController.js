@@ -1,4 +1,5 @@
-// const db = require('../models/appModels.js');
+const path = require('path')
+const db = require(path.resolve(__dirname, '../../database/pool.js'));
 
 const loginController = {
   /*Middleware goes here*/
@@ -20,13 +21,13 @@ const loginController = {
         return next();
       }
 
-      res.locals.loginAttempt =  {login: 'success'};
+      res.locals.loginAttempt =  {login: 'success', username: queryRes.rows[0].username};
       return next();
     });
     */
 
     console.log('inside loginController.attemptLogin');
-    res.locals.attempted = {attempted : 'login'};
+    res.locals.attemptResponse = {attempted : 'login'};
     return next();
   }
 };
