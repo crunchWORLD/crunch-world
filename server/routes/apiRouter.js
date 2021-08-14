@@ -10,8 +10,8 @@ apiRouter.get('/products', apiController.getProducts, (req, res) => {
   return res.status(200).set('Content-Type', 'json/application').json(res.locals.products);
 })
 
-apiRouter.get('/jorge', (req, res) => {
-  return res.status(200).set('Content-Type', 'text/plain').send('Sending text/plain response from /api/jorge');
+apiRouter.post('/order', apiController.postOrder, (req, res) => {
+  return res.status(200).set('Content-Type', 'json/application').json(res.locals.orderResponse);
 })
 
 module.exports = apiRouter;

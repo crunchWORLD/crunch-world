@@ -16,9 +16,33 @@ const apiController = {
     */
     console.log('inside apiController.getProducts');
     res.locals.products = {retrieved : 'products'};
-   return next();
+    return next();
+  },
+
+  async postOrder(req, res, next) {
+    /*
+    const query = `INSERT INTO orders (...)
+    VALUES ($1, $2, $3...) RETURNING *`
+
+    const values = [req.body.date, ...];
+
+    await db.query(query, values, (err, queryRes) => {
+      if (err) return next(err);
+
+      if (queryRes.rows.length === 0) {
+        res.locals.orderResponse = {error : 'query failed to POST to database!'};
+        return next();
+      }
+
+      res.locals.orderResponse = queryRes.rows[0]
+      return next();
+    });
+
+    */
+
+    res.locals.orderResponse = {order : 'submitted?'};
+    return next();
   }
 };
-
 
 module.exports = apiController;
