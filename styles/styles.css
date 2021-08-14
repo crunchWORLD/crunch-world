@@ -1,6 +1,22 @@
-/* * {
+
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  border: 1px;
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
   border: 1px solid rgb(131, 131, 170);
-} */
+}
+
+.display-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-container{
+  display: flex;
+  justify-content: center;
+  border: 1px solid rgb(131, 131, 170);
+  margin-top: 20px;
+}
