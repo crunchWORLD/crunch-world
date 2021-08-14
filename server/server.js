@@ -4,6 +4,9 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 
+const mainRouter = require(path.resolve(__dirname, './routes/mainRouter'));
+const apiRouter = require(path.resolve(__dirname, './routes/apiRouter'));
+
 if (process.env.NODE_ENV === 'production') {
   // statically serve everything in the build folder on the route '/build'
   app.use('/build', express.static(path.join(__dirname, '../build')));
@@ -14,4 +17,15 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+// ROUTERS
+app.use('/', mainRouter);
+app.use('/api', apiRouter);
+
+//GLOBAL ERROR HANDLER
+app.use(function (err, req, res, next) {
+  console.log('An error has occured!');
+  res.status(400).set('Content-Type', 'json/application').json(err);
+})
+
+//CONFIRMS PORT BEING LISTENED ON
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}...`));
