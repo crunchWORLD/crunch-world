@@ -15,7 +15,7 @@ const [count, setCount] = useState(0);
     <ProductDisplay/>
       </div>
       <section>{count}</section>
-       <button onClick={()=> setCount((cs)=> cs + 1)}>+</button>
+       <button onClick={()=> setCount((cs)=> cs - 1)}>+</button>
        <section>{count}</section>
        <button onClick={()=> setCount((cs)=> cs + 5)}>+</button>
     </div>
