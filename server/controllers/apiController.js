@@ -3,20 +3,18 @@ const db = require(path.resolve(__dirname, '../../database/pool.js'));
 
 const apiController = {
   async getProducts(req, res, next) {
-    /*
     const query = `SELECT * FROM products`;
 
     //CALLBACK METHOD
     await db.query(query, null, (err, queryRes) => {
       if (err) return next(err);
 
+      console.log(queryRes.rows);
       res.locals.products = queryRes.rows; //should return array of objects with details on ALL products
       return next();
     });
-    */
-    console.log('inside apiController.getProducts');
-    res.locals.products = {retrieved : 'products'};
-    return next();
+
+    // res.locals.products = {retrieved : 'products'}; // POSTMAN TEST
   },
 
   async postOrder(req, res, next) {
@@ -40,7 +38,7 @@ const apiController = {
 
     */
 
-    res.locals.orderResponse = {order : 'submitted?'};
+    res.locals.orderResponse = {order : 'submitted!'};
     return next();
   }
 };
