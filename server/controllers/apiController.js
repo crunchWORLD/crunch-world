@@ -13,8 +13,6 @@ const apiController = {
       res.locals.products = queryRes.rows; //should return array of objects with details on ALL products
       return next();
     });
-
-    // res.locals.products = {retrieved : 'products'}; // POSTMAN TEST
   },
 
   async postOrder(req, res, next) {
