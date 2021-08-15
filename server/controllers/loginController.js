@@ -2,33 +2,29 @@ const path = require('path')
 const db = require(path.resolve(__dirname, '../../database/pool.js'));
 
 const loginController = {
-  /*Middleware goes here*/
   async attemptLogin(req, res, next) {
-    /*
-    const query = `SELECT * FROM users
-    WHERE username = $1 AND password = $2`;
+    const query = `SELECT * FROM customers
+    WHERE email = $1 AND password = $2;`;
 
-    const values = [req.body.username, req.body.password];
+    const values = [req.query.email, req.query.password];
+
     await db.query(query, values, (err, queryRes) => {
       if (err) {
         // we don't want a login failure to break our app--just reponse with a failed login attempt
-        res.locals.loginAttempt = {login: 'failure'};
+        res.locals.loginAttempt = {login: 'Query Failure!'};
         return next();
       }
 
-      if (queryResp.rows.length === 0) {
-        res.locals.loginAttempt = {login: 'failure'};
+      if (queryRes.rows.length === 0) {
+        res.locals.loginAttempt = {login: 'Login Credentials Invalid!'};
         return next();
       }
 
-      res.locals.loginAttempt =  {login: 'success', username: queryRes.rows[0].username};
+      console.log(queryRes.rows[0]);
+
+      res.locals.loginAttempt =  {login: 'Login Success!'};
       return next();
     });
-    */
-
-    console.log('inside loginController.attemptLogin');
-    res.locals.attemptResponse = {attempted : 'login'};
-    return next();
   }
 };
 

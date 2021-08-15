@@ -6,8 +6,8 @@ const loginController = require(path.resolve(__dirname, '../controllers/loginCon
 
 const loginRouter = express.Router();
 
-loginRouter.post('/', loginController.attemptLogin, (req, res) => {
-  return res.status(200).set('Content-Type', 'json/application').json(res.locals.attemptResponse);
+loginRouter.get('/', loginController.attemptLogin, (req, res) => {
+  return res.status(200).set('Content-Type', 'json/application').json(res.locals.loginAttempt);
 });
 
 module.exports = loginRouter;

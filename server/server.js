@@ -8,6 +8,9 @@ const mainRouter = require(path.resolve(__dirname, './routes/mainRouter'));
 const apiRouter = require(path.resolve(__dirname, './routes/apiRouter'));
 const loginRouter = require(path.resolve(__dirname, './routes/loginRouter'));
 
+app.use(express.urlencoded({ extended: true })); //parses URL route into req.params or req.query
+app.use(express.json()) //parses req.body from JSON to JS
+
 if (process.env.NODE_ENV === 'production') {
   // statically serve everything in the build folder on the route '/build'
   app.use('/build', express.static(path.join(__dirname, '../build')));
