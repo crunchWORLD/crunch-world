@@ -7,10 +7,10 @@ const Cart = () =>{
     console.log(state);
     return(
         <div className="cart-container">
-            {state.map(products =>{
-                  return <MaterialCards key={products.id} description={products.description} name={products.name} origin={products.origin} price={products.price} img={products.img_url}/>
+            {state.map((products, i) => {
+                  return <MaterialCards key={i} description={products.description} name={products.name} origin={products.origin} price={products.price} img={products.img_url}/>
             })}
-         
+         <button onClick={()=> dispatch({ type: "CHECKOUT_CART", payload: state })} >Checkout</button>
         </div>
     )
 }

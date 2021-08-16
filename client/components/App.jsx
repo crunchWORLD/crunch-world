@@ -9,8 +9,8 @@ import SignUp from './Signup.jsx';
 
 const appReducer = (state, action) => {
   switch (action.type) {
-    case "LOAD_CART":
-      return [...state, ...action.payload];
+    case "CHECKOUT_CART":
+      return [];
     case "ADD_CART":
       return [action.payload, ...state];
     default:

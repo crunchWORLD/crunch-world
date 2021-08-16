@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { AppContext } from "./App.jsx";
 
+
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -20,7 +21,8 @@ const useStyles = makeStyles({
 
 export default function MaterialCards({name, origin, price, img, stock, description }) {
   const classes = useStyles();
-const [cartItems, setCartItems] = useState([])
+const [cartItems, setCartItems] = useState([]);
+const [state, dispatch] = useContext(AppContext);
   console.log(name)
   useEffect(() =>{
       console.log(cartItems)
@@ -51,9 +53,9 @@ const [cartItems, setCartItems] = useState([])
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick={()=>setCartItems(cartItems.concat([name,origin]))}>
+        {/* <Button size="small" color="primary" onClick={()=> dispatch({ type: "ADD_CART", payload: <MaterialCards />})}>
           Add TO Cart
-        </Button>
+        </Button> */}
         
       </CardActions>
     </Card>
