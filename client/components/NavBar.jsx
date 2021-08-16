@@ -1,4 +1,5 @@
-import React, {useState, useEffect, useReducer} from 'react';
+import React, {useState, useEffect, useReducer, useContext} from 'react';
+import { AppContext } from "./App.jsx";
 import {Link} from 'react-router-dom';
 const Nav = () =>{
 
