@@ -4,6 +4,7 @@ import Cart from './Cart.jsx'
 import Login from './Login.jsx'
 import Nav from './NavBar.jsx'
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import SignUp from './Signup.jsx';
 const App = () =>{
 const [count, setCount] = useState(0);
 
@@ -22,8 +23,11 @@ const [count, setCount] = useState(0);
       <Route exact path="/cart">
         <Cart/>
         </Route>
-        <Route exact path="/signup">
+        <Route exact path="/signin">
         <Login/>
+        </Route>
+        <Route exact path="/signup">
+         <SignUp/>
         </Route>
   </Switch>
      

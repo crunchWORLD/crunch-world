@@ -10,7 +10,7 @@ const Nav = () =>{
    </div>
    <div className="interactables">
       <Link to="/cart">Cart</Link>
-   <br></br>  <Link to="/signup">Login</Link>
+   <br></br>  <Link to="/signin">Login</Link>
       
    </div>
     
