@@ -13,6 +13,7 @@ import { AppContext } from "./App.jsx";
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+    height: 345,
   },
   media: {
     height: 140,
