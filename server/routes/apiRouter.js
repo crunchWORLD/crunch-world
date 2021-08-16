@@ -10,7 +10,8 @@ apiRouter.get('/products', apiController.getProducts, (req, res) => {
   return res.status(200).set('Content-Type', 'json/application').json(res.locals.products);
 })
 
-apiRouter.post('/order', apiController.postOrder, (req, res) => {
+//subtotal, taxtotal, shiptotal, cust_id, product_id, quantity
+apiRouter.post('/order', apiController.postOrder, /*apiController.postOrders_detail,*/ (req, res) => {
   return res.status(200).set('Content-Type', 'json/application').json(res.locals.orderResponse);
 })
 
