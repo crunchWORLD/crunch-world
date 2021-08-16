@@ -8,8 +8,7 @@ const apiController = {
     //CALLBACK METHOD
     await db.query(query, null, (err, queryRes) => {
       if (err) return next(err);
-
-      console.log(queryRes.rows);
+      
       res.locals.products = queryRes.rows; //should return array of objects with details on ALL products
       return next();
     });

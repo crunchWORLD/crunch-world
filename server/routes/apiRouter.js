@@ -15,4 +15,8 @@ apiRouter.post('/order', apiController.postOrder, /*apiController.postOrders_det
   return res.status(200).set('Content-Type', 'json/application').json(res.locals.orderResponse);
 })
 
+// apiRouter.post('/dummyOrder', apiController.dummyMultiOrder, (req, res) => {
+//   return res.status(200).set('Content-Type', 'json/application').json(res.locals.orderResponse);
+// })
+
 module.exports = apiRouter;
