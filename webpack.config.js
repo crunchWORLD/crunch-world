@@ -35,5 +35,6 @@ module.exports = {
       '/images': 'http://localhost:3000'
     },
     hot: true,
+    historyApiFallback: true,
   }
 }

@@ -1,4 +1,6 @@
-
+body{
+  background-color: rgb(255, 189, 114);
+}
 
 .header {
   display: flex;
@@ -9,9 +11,11 @@
 }
 
 .display-container{
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 1rem;
+  
 }
 
 .product-container{
