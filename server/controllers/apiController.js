@@ -13,7 +13,73 @@ const apiController = {
       return next();
     });
   },
-  /*
+
+  async postOrders(req, res, next) {
+    const ordersQuery = `INSERT INTO orders (date, subtotal, taxtotal, shiptotal, cust_id)
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *`
+    
+    const ordersValues = [new Date().toISOString(), req.body.subtotal, req.body.taxtotal, req.body.shiptotal, req.body.cust_id];
+
+    await db.query(ordersQuery, ordersValues, async (err, queryRes) => {
+      if (err) {
+        res.locals.orderResponse = {orderStatus: 'failure', message: 'error occured when sending query'};
+        return next();
+      } else if (queryRes.rows.length === 0) {
+        res.locals.orderResponse = {orderStatus: 'failure', message: 'queryRes.rows empty'};
+        return next();
+      }
+
+      res.locals.orderResponse = {orderStatus: 'success'};
+      res.locals.order_id = queryRes.rows[0].id;
+
+      for (let i = 0; i < req.body.products.length; i++) {
+        let currProduct = req.body.products[i];
+        console.log('currProduct is: ', currProduct);
+  
+        let detailsQuery = `INSERT INTO orders_detail (order_id, product_id, quantity)
+        VALUES ($1, $2, $3)`
+
+        let detailsValues = [res.locals.order_id, currProduct.product_id, currProduct.quantity];
+         
+        await db.query(detailsQuery, detailsValues, (err, queryRes) => {
+          if (err) {
+            console.log('Failure (err) durring iteration: ', i);
+            console.log(err);
+            return next(err)
+          }
+        });
+      }
+      return next();
+    });
+  },
+};
+
+module.exports = apiController;
+
+  /* NOTES ON HOW TO HANDLE TOE ORDER REQUEST =============================================================
+  What will the order request look like?
+
+  Whether it's an order of 1 product or an order of 10 products, all orders MUST be submitted within an array.
+  The array will be included within the body of the request (req.body.orderArr or something).
+
+  Ex:
+  {
+    "subtotal" : 100,
+    "taxtotal" : 0,
+    "shiptotal" : 0,
+    "cust_id" : 1,
+    "products" : [
+      {"product_id": 1, "quantity": 1},
+      {"product_id": 2, "quantity": 1},
+      {"product_id": 3, "quantity": 1}
+    ]
+  }
+
+  Notice that each individual sub-order is an object!
+  */
+
+  /* // OLD postOrders MIDDLEWARE FUNCTION =============================================================
   async postOrders(req, res, next) {
     const query = `INSERT INTO orders (date, subtotal, taxtotal, shiptotal, cust_id)
     VALUES ($1, $2, $3, $4, $5)
@@ -62,66 +128,3 @@ const apiController = {
     });
   },
   */
-  async postOrders(req, res, next) {
-    const ordersQuery = `INSERT INTO orders (date, subtotal, taxtotal, shiptotal, cust_id)
-    VALUES ($1, $2, $3, $4, $5)
-    RETURNING *`
-    
-    const ordersValues = [new Date().toISOString(), req.body.subtotal, req.body.taxtotal, req.body.shiptotal, req.body.cust_id];
-
-    await db.query(ordersQuery, ordersValues, async (err, queryRes) => {
-      if (err) {
-        res.locals.orderResponse = {orderStatus: 'failure', message: 'error occured when sending query'};
-        return next();
-      } else if (queryRes.rows.length === 0) {
-        res.locals.orderResponse = {orderStatus: 'failure', message: 'queryRes.rows empty'};
-        return next();
-      }
-
-      res.locals.orderResponse = {orderStatus: 'success'};
-      res.locals.order_id = queryRes.rows[0].id;
-
-      for (let i = 0; i < req.body.products.length; i++) {
-        let currProduct = req.body.products[i];
-        console.log('currProduct is: ', currProduct);
-  
-        let detailsQuery = `INSERT INTO orders_detail (order_id, product_id, quantity)
-        VALUES ($1, $2, $3)`
-
-        let detailsValues = [res.locals.order_id, currProduct.product_id, currProduct.quantity];
-         
-        await db.query(detailsQuery, detailsValues, (err, queryRes) => {
-          if (err) {
-            console.log('Failure (err) durring iteration: ', i);
-            console.log(err);
-            return next()
-          }
-        });
-      }
-      return next();
-    });
-  },
-};
-  /*
-  What will the order request look like?
-
-  Whether it's an order of 1 product or an order of 10 products, all orders MUST be submitted within an array.
-  The array will be included within the body of the request (req.body.orderArr or something).
-
-  Ex:
-  {
-    "subtotal" : 100,
-    "taxtotal" : 0,
-    "shiptotal" : 0,
-    "cust_id" : 1,
-    "products" : [
-      {"product_id": 1, "quantity": 1},
-      {"product_id": 2, "quantity": 1},
-      {"product_id": 3, "quantity": 1}
-    ]
-  }
-
-  Notice that each individual sub-order is an object!
-  */
-
-module.exports = apiController;
