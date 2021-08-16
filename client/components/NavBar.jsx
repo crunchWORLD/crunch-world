@@ -1,19 +1,20 @@
 import React, {useState, useEffect, useReducer} from 'react';
-import Cart from './Cart.jsx'
-import Login from './Login.jsx'
+import {Link} from 'react-router-dom';
 const Nav = () =>{
 
     return (
-<div className="nav-container">
+<nav className="nav-container">
    <div className="logo">
-logo
+<Link to="/">logo</Link>
+
    </div>
    <div className="interactables">
-     <button><Cart/></button>  
-      <button><Login/></button> 
+      <Link to="/cart">Cart</Link>
+   <br></br>  <Link to="/signup">Login</Link>
+      
    </div>
     
-</div>
+</nav>
     )
 } 
 

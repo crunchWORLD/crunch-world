@@ -9,7 +9,7 @@ import {useEffect, useState} from "react"
               setState(result)
               
           })
-           }, [url, setState])
+           }, [])
     return state;
         }
 
