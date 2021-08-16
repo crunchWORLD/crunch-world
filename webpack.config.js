@@ -34,5 +34,6 @@ module.exports = {
       '/login': 'http://localhost:3000',
     },
     hot: true,
+    historyApiFallback: true,
   }
 }
