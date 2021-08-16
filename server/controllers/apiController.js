@@ -14,7 +14,7 @@ const apiController = {
     });
   },
 
-  async postOrder(req, res, next) {
+  async postOrders(req, res, next) {
     const query = `INSERT INTO orders (date, subtotal, taxtotal, shiptotal, cust_id)
     VALUES ($1, $2, $3, $4, $5)
     RETURNING *`
@@ -39,10 +39,10 @@ const apiController = {
     });
 
     // POSTING TO orders_detail =================================
-    /*START+++++++++++
+    
     const detailsQuery = `INSERT INTO orders_detail (order_id, product_id, quantity)
     VALUES ($1, $2, $3)
-    RETURNING *`;
+    RETURNING *`
 
     const detailsValues = [res.locals.order_id, req.body.product_id, req.body.quantity];
 
@@ -60,34 +60,51 @@ const apiController = {
       res.locals.orderResponse.detailsStatus = 'success';
       return next();
     });
-    END+++++++++++*/ 
   },
 
-  /*
-  async postOrders_detail() {
-    const query = `INSERT INTO orders_detail (order_id, product_id, quantity)
-    VALUES ($1, $2, $3)
-    RETURNING *`
+  async dummyOrders(req, res, next) {
+    /*
+    What will the order request look like?
 
-    const values = [res.locals.order_id, req.body.product_id, req.body.quantity];
+    Whether it's an order of 1 product or an order of 10 products, all orders MUST be submitted within an array.
+    The array will be included within the body of the request (req.body.orderArr or something).
 
-    await db.query(query, values, (err, queryRes) => {
-      if (err) {
-        res.locals.orderResponse.orders_detailResponse = 'failure';
-        return next();
-      }
+    Ex:
+    [
+      {"subtotal": 10, "taxtotal":0, "shiptotal":0, "cust_id":1, "product_id":1, "quantity":1},
+      {"subtotal": 20, "taxtotal":0, "shiptotal":0, "cust_id":1, "product_id":2, "quantity":1},
+      {"subtotal": 30, "taxtotal":0, "shiptotal":0, "cust_id":1, "product_id":3, "quantity":1}
+    ]
 
-      if (queryRes.rows.length === 0) {
-        res.locals.orderResponse.orders_detailResponse = 'failure';
-        return next();
-      }
-      
-      console.log('ORDERS_DETAIL: ', queryRes.rows[0]);
+    Notice that each individual sub-order is an object
+    */
+    
+    res.locals.orderStatuses = []; // will contain all order statuses
 
-      return next();
-    });
-  }
-  */
+    for (let i = 0; i < req.body.length; i++) {
+      console.log(`Ordering for the ${i}th product in the array`);
+
+      let currOrder = req.body[i];
+
+      let ordersQuery = `INSERT INTO orders (date, subtotal, taxtotal, shiptotal, cust_id)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *`
+      let ordersValues = [new Date().toISOString(), currOrder.subtotal, currOrder.taxtotal, currOrder.shiptotal, currOrder.cust_id];
+      console.log(ordersValues);
+      //await db.query here to return _id from orders table
+        //res.locals.order_id = queryRes.rows[0].id;
+
+      let detailsQuery = `INSERT IN orders_detail (order_id, product_id, quantity)
+      VALUES ($1, $2, $3)
+      RETURNING *`
+      let detailsValues = [/*res.locals.order_id,*/ currOrder.product_id, currOrder.quantity];
+      console.log(detailsValues);
+      //await db.query here to return status
+    }
+
+    res.locals.dummyResponse = {'whatever': 'dummy response lol'};
+    return next();
+  },
 };
 
 module.exports = apiController;
