@@ -10,6 +10,7 @@ const loginRouter = require(path.resolve(__dirname, './routes/loginRouter'));
 
 app.use(express.urlencoded({ extended: true })); //parses URL route into req.params or req.query
 app.use(express.json()) //parses req.body from JSON to JS
+app.use('/images', express.static(path.join(__dirname, '../images')));
 
 if (process.env.NODE_ENV === 'production') {
   // statically serve everything in the build folder on the route '/build'

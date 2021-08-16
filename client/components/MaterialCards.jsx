@@ -34,13 +34,13 @@ const [state, dispatch] = useContext(AppContext);
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
+          image={`../../images/${img}`}
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {name}
-            
+
           </Typography>
           <Typography variant="body1" color="textSecondary" component="p">
             Price: ${price}
@@ -57,7 +57,7 @@ const [state, dispatch] = useContext(AppContext);
         {/* <Button size="small" color="primary" onClick={()=> dispatch({ type: "ADD_CART", payload: <MaterialCards />})}>
           Add TO Cart
         </Button> */}
-        
+
       </CardActions>
     </Card>
   );
