@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect, useReducer} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -19,6 +19,11 @@ const useStyles = makeStyles({
 
 export default function MaterialCards({name, origin, price, img, stock, description }) {
   const classes = useStyles();
+const [cartItems, setCartItems] = useState([])
+  console.log(name)
+  useEffect(() =>{
+      console.log(cartItems)
+  },[cartItems])
 
   return (
     <Card className={classes.root}>
@@ -31,6 +36,7 @@ export default function MaterialCards({name, origin, price, img, stock, descript
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {name}
+            
           </Typography>
           <Typography variant="body1" color="textSecondary" component="p">
             Price: ${price}
@@ -44,7 +50,7 @@ export default function MaterialCards({name, origin, price, img, stock, descript
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" >
+        <Button size="small" color="primary" onClick={()=>setCartItems(cartItems.concat([name,origin]))}>
           Add TO Cart
         </Button>
         

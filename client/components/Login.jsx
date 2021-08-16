@@ -72,9 +72,9 @@ function poster(data) {
 
 export default function Login() {
     const [values, handleChange] = useForm({email: '', password: ''});
-    useEffect(()=>{
-        console.log(values)
-    }, [values]);
+    // useEffect(()=>{
+    //     console.log(values)
+    // }, [values]);
   const classes = useStyles();
 
   return (
