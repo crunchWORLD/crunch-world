@@ -26,8 +26,15 @@ const Cart = () =>{
                     return acc + cv
                 })
         }
-        console.log('pricer', state.price)
-        const sum = priceSum(state.price)
+        
+        const sum = priceSum(state.map(products=> products.price))
+
+        const totaler = (arr) =>{
+            let count = 0
+            for(let ele of arr) count +=ele
+            return count
+        }
+        console.log('pricer', totaler(sum) )
     return(
         <div className="cart-container">
             {state.map((products, i) => {

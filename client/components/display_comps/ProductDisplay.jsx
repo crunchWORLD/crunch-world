@@ -8,9 +8,9 @@ import Button from '@material-ui/core/Button';
 import { createTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 const ProductDisplay = () =>{
 
-  const AddToCardButtonStyle = withStyles({
+  const AddToCardButton = withStyles({
     root: {
-      width: '400px',
+      width: '345px',
     },
   })(Button);
     
@@ -35,10 +35,10 @@ const ProductDisplay = () =>{
                  return(<div key={products.stock + products.id}>
 
                  <MaterialCards key={products.id} description={products.description} name={products.name} origin={products.origin} price={products.price} img={products.img_url} />
-                 <Button
+                 <AddToCardButton
                  variant="contained" 
                  onClick={()=> dispatch({ type: "ADD_CART", payload: products })}
-                 >Add To Cart</Button> </div>)
+                 >Add To Cart</AddToCardButton> </div>)
             })}
           {/* <Cart key={'cart'} cartItems={[...cartItems]}/> */}
         </div>
