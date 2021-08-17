@@ -15,12 +15,45 @@ body{
   height: 100vh;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 1rem;
-  
 }
 
-.product-container{
+.grid-item {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.product-container {
   display: flex;
   justify-content: center;
   border: 1px solid rgb(131, 131, 170);
   margin-top: 20px;
 }
+
+.nav-container {
+  height: 100px;
+  font-size: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.interactables {
+  display: flex;
+  justify-content: space-between;
+}
+
+.interactables a {
+  padding: 0 20px;
+  color: brown;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
+}
+
+.logo img {
+  padding: 0 20px;
+  width: 374px;
+  height: 76px;
+}
+

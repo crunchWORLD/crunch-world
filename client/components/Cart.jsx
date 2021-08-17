@@ -40,6 +40,7 @@ const Cart = () =>{
             {state.map((products, i) => {
                   return <MaterialCards key={i} description={products.description} name={products.name} origin={products.origin} price={products.price} img={products.img_url}/>
             })}
+           {state.length !== 0 && <p>Total Price:${totaler(sum)}</p>}
          <button onClick={()=> dispatch({ type: "CHECKOUT_CART", payload: state })} >Checkout</button>
         </div>
     )

@@ -11,8 +11,9 @@ const ProductDisplay = () =>{
   const AddToCardButton = withStyles({
     root: {
       width: '345px',
+      color: 'maroon',
     },
-  })(Button);
+  })(Button); //withStyles({css styling})(component you want to add onto <Button>)
     
     const productArr = useFetch('/api/products')
       const [state, dispatch] = useContext(AppContext);
@@ -32,10 +33,11 @@ const ProductDisplay = () =>{
              {/* <button onClick={()=> setCartItems(cartItems.concat(products))}> */}
             {productArr.map(products =>{
                 
-                 return(<div key={products.stock + products.id}>
+                 return(<div className="grid-item" key={products.stock + products.id}>
 
                  <MaterialCards key={products.id} description={products.description} name={products.name} origin={products.origin} price={products.price} img={products.img_url} />
                  <AddToCardButton
+                 //<Button>props</Button>
                  variant="contained" 
                  onClick={()=> dispatch({ type: "ADD_CART", payload: products })}
                  >Add To Cart</AddToCardButton> </div>)
